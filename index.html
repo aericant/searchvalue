@@ -7,7 +7,12 @@
 
     <h1>Sort the Entered Array</h1>
 
-    <button onclick="sortArray()">Enter Array and Sort</button>
+    <label>Enter array values (separated by commas):</label><br>
+    <input type="text" id="arrayInput">
+
+    <br><br>
+
+    <button onclick="performBubbleSort()">Sort</button>
 
     <h2>Original Array:</h2>
     <p id="original"></p>
@@ -17,19 +22,38 @@
 
     <script>
 
-        function sortArray() {
+        function performBubbleSort() {
+
+            let rawInput = document.getElementById("arrayInput").value;
 
             let numbers = [];
 
-            let size = Number(prompt("Enter the number of elements:"));
+            let currentNum = "";
 
-            for (let i = 0; i < size; i++) {
 
-                numbers[i] = Number(prompt("Enter value " + i + ":"));
+            for (let i = 0; i < rawInput.length; i++) {
 
+                if (rawInput[i] === ",") {
+
+                    numbers[numbers.length] =
+                        Number(currentNum.trim());
+
+                    currentNum = "";
+
+                } else {
+
+                    currentNum += rawInput[i];
+
+                }
             }
 
+
+            numbers[numbers.length] =
+                Number(currentNum.trim());
+
+
             let originalOutput = "";
+
 
             for (let i = 0; i < numbers.length; i++) {
 
@@ -38,12 +62,16 @@
 
             }
 
-            document.getElementById("original").innerHTML = originalOutput;
+
+            document.getElementById("original").innerHTML =
+                originalOutput;
 
 
             for (let i = 0; i < numbers.length - 1; i++) {
 
-                for (let j = 0; j < numbers.length - 1 - i; j++) {
+                for (let j = 0;
+                     j < numbers.length - 1 - i;
+                     j++) {
 
                     if (numbers[j] > numbers[j + 1]) {
 
@@ -60,6 +88,7 @@
 
             let sortedOutput = "";
 
+
             for (let i = 0; i < numbers.length; i++) {
 
                 sortedOutput +=
@@ -67,7 +96,9 @@
 
             }
 
-            document.getElementById("sorted").innerHTML = sortedOutput;
+
+            document.getElementById("sorted").innerHTML =
+                sortedOutput;
 
         }
 
