@@ -1,56 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Search for a Value</title>
+    <title>Sort the Entered Array</title>
 </head>
 <body>
 
-    <h1>Search for a Value</h1>
+    <h1>Sort the Entered Array</h1>
 
     <label>Enter array values (separated by commas):</label><br>
-    <input type="text" id="arrayValues" value="1, 2, 3">
+    <input type="text" id="arrayValues" value="">
 
     <br><br>
 
-    <label>Enter value to search:</label><br>
-    <input type="text" id="searchValue" value="3">
+    <button onclick="sortArray()">Sort</button>
 
-    <br><br>
+    <h2>Original Array:</h2>
+    <p id="original"></p>
 
-    <button onclick="searchValue()">Search</button>
-
-    <h2>Result:</h2>
-    <p id="result"></p>
+    <h2>Sorted Array:</h2>
+    <p id="sorted"></p>
 
     <script>
 
-        function searchValue() {
+        function sortArray() {
 
             let input = document.getElementById("arrayValues").value;
-            let search = document.getElementById("searchValue").value;
 
             let numbers = input.split(",");
 
-            let found = false;
+            for (let i = 0; i < numbers.length; i++) {
+                numbers[i] = Number(numbers[i].trim());
+            }
+
+            let originalOutput = "";
 
             for (let i = 0; i < numbers.length; i++) {
+                originalOutput += "Index " + i + ": " + numbers[i] + "<br>";
+            }
 
-                if (numbers[i].trim() === search.trim()) {
+            document.getElementById("original").innerHTML = originalOutput;
 
-                    document.getElementById("result").innerHTML =
-                        'Value "' + search + '" found at index ' + i + '.';
+            for (let i = 0; i < numbers.length - 1; i++) {
 
-                    found = true;
-                    break;
+                for (let j = 0; j < numbers.length - 1 - i; j++) {
+
+                    if (numbers[j] > numbers[j + 1]) {
+
+                        let temp = numbers[j];
+
+                        numbers[j] = numbers[j + 1];
+
+                        numbers[j + 1] = temp;
+                    }
                 }
             }
 
-            if (found === false) {
+            let sortedOutput = "";
 
-                document.getElementById("result").innerHTML =
-                    'Value "' + search + '" does not exist in the array.';
-
+            for (let i = 0; i < numbers.length; i++) {
+                sortedOutput += "Index " + i + ": " + numbers[i] + "<br>";
             }
+
+            document.getElementById("sorted").innerHTML = sortedOutput;
         }
 
     </script>
