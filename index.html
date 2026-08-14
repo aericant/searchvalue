@@ -36,20 +36,20 @@
                 if (rawInput[i] === ",") {
 
                     numbers[numbers.length] =
-                        Number(currentNum.trim());
+                        Number(currentNum);
 
                     currentNum = "";
 
-                } else {
+                } 
+                else if (rawInput[i] !== " ") {
 
                     currentNum += rawInput[i];
 
                 }
             }
 
-
             numbers[numbers.length] =
-                Number(currentNum.trim());
+                Number(currentNum);
 
 
             let originalOutput = "";
@@ -61,7 +61,6 @@
                     "Index " + i + ": " + numbers[i] + "<br>";
 
             }
-
 
             document.getElementById("original").innerHTML =
                 originalOutput;
@@ -95,7 +94,6 @@
                     "Index " + i + ": " + numbers[i] + "<br>";
 
             }
-
 
             document.getElementById("sorted").innerHTML =
                 sortedOutput;
